@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="LogLens: análise local de logs para triagem de incidentes.">
+  <title>LogLens · LAB//ABERTO</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="shell">
+  <header class="hero">
+    <div><p class="eyebrow">LAB//ABERTO #005</p><h1>Log<span>Lens</span></h1><p>Encontre erros, padrões e picos sem transformar um arquivo de log numa escavação arqueológica.</p></div>
+    <div class="terminal" aria-hidden="true"><b>ERROR</b><i>WARN</i><em>INFO</em></div>
+  </header>
+
+  <section class="panel uploader">
+    <label class="drop" for="file"><strong>Escolha um .log ou .txt</strong><span>máximo 2 MB · processado em memória</span><input id="file" type="file" accept=".log,.txt,text/plain"></label>
+    <button id="demo" class="ghost">Carregar exemplo</button>
+    <div id="feedback" role="status"></div>
+  </section>
+
+  <section id="results" hidden>
+    <div class="metrics">
+      <article><span>Linhas</span><strong id="m-lines">0</strong></article>
+      <article><span>Erros</span><strong id="m-errors">0</strong></article>
+      <article><span>Avisos</span><strong id="m-warns">0</strong></article>
+      <article><span>Saúde</span><strong id="m-score">100</strong></article>
+    </div>
+
+    <section class="panel">
+      <div class="heading"><div><p class="eyebrow">Linha do tempo</p><h2>Volume por minuto</h2></div><button id="json" class="ghost">Exportar JSON</button><button id="report" class="ghost">Relatório .md</button></div>
+      <canvas id="chart" width="1000" height="260"></canvas>
+    </section>
+
+    <section class="panel">
+      <p class="eyebrow">Padrões prioritários</p><h2>Mensagens recorrentes</h2><div id="patterns" class="patterns"></div>
+    </section>
+
+    <section class="panel">
+      <div class="heading"><div><p class="eyebrow">Eventos</p><h2>Explorar linhas</h2></div><input id="search" type="search" placeholder="buscar mensagem..."></div>
+      <div id="filters" class="filters"></div>
+      <div class="table-wrap"><table><thead><tr><th>Linha</th><th>Horário</th><th>Nível</th><th>Mensagem</th></tr></thead><tbody id="events"></tbody></table></div>
+    </section>
+  </section>
+</main>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
